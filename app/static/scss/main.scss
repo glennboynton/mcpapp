@@ -1,0 +1,18 @@
+// app/static/scss/main.scss - (./app/static/scss/main.scss)
+// Primary stylesheet that composes theme and layout rules.
+
+@import "theme";
+
+body {
+  background-color: $body-bg-light;
+  color: $body-color-light;
+}
+
+[data-bs-theme="dark"] body {
+  background-color: $body-bg-dark;
+  color: $body-color-dark;
+}
+
+.navbar-brand {
+  font-weight: 600;
+}

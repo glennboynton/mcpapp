@@ -1,0 +1,26 @@
+# .gitignore - Root of project (./.gitignore)
+# Ignore typical Python and Flask build/runtime artifacts.
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+instance/
+*.db
+*.sqlite3
+venv/
+.env.*
+.cache/
+*.log
+.DS_Store
+pyvenv.cfg
+
+# VS Code / IDE settings
+.vscode/
+.idea/
+
+# VENV
+/Include/**
+/Lib/**
+/Scripts/**

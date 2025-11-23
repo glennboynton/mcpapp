@@ -1,0 +1,57 @@
+{# app/templates/api_admin/integration_form.html #}
+{% extends 'base.html' %}
+{% block title %}Integration{% endblock %}
+{% block content %}
+<h2>{{ integration and 'Edit' or 'New' }} Integration</h2>
+<form method="post" class="row g-3">
+  {{ form.hidden_tag() }}
+  <div class="col-md-6">
+    {{ form.name.label(class="form-label") }}
+    {{ form.name(class="form-control") }}
+  </div>
+  <div class="col-md-6">
+    {{ form.system_name.label(class="form-label") }}
+    {{ form.system_name(class="form-control") }}
+  </div>
+  <div class="col-md-6">
+    {{ form.base_url.label(class="form-label") }}
+    {{ form.base_url(class="form-control") }}
+  </div>
+  <div class="col-md-6">
+    {{ form.endpoint_path.label(class="form-label") }}
+    {{ form.endpoint_path(class="form-control") }}
+  </div>
+  <div class="col-md-4">
+    {{ form.http_method.label(class="form-label") }}
+    {{ form.http_method(class="form-select") }}
+  </div>
+  <div class="col-md-4">
+    {{ form.status.label(class="form-label") }}
+    {{ form.status(class="form-select") }}
+  </div>
+  <div class="col-md-4">
+    {{ form.auth_type.label(class="form-label") }}
+    {{ form.auth_type(class="form-select") }}
+  </div>
+  <div class="col-md-12">
+    {{ form.api_key.label(class="form-label") }}
+    {{ form.api_key(class="form-control") }}
+  </div>
+  <div class="col-md-12">
+    {{ form.docusaurus_doc_path.label(class="form-label") }}
+    {{ form.docusaurus_doc_path(class="form-control") }}
+  </div>
+  <div class="col-12">
+    {{ form.notes.label(class="form-label") }}
+    {{ form.notes(class="form-control", rows=4) }}
+  </div>
+  <div class="col-12">
+    {{ form.submit(class="btn btn-primary") }}
+    <a
+      href="{{ url_for('developer.my_integrations') }}"
+      class="btn btn-secondary ms-2"
+      >Cancel</a
+    >
+  </div>
+</form>
+{% endblock %}

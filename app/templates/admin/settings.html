@@ -1,0 +1,18 @@
+{# app/templates/admin/settings.html #}
+{% extends 'base.html' %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+<h2>Site Settings</h2>
+<form method="post" class="col-md-6">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">
+    {{ form.key.label(class="form-label") }}
+    {{ form.key(class="form-control", readonly=true) }}
+  </div>
+  <div class="mb-3">
+    {{ form.value.label(class="form-label") }}
+    {{ form.value(class="form-control", value=setting.value if setting else '') }}
+  </div>
+  <button class="btn btn-primary" type="submit">Save</button>
+</form>
+{% endblock %}

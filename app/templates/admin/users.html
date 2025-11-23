@@ -1,0 +1,49 @@
+{# app/templates/admin/users.html #}
+{% extends 'base.html' %}
+{% block title %}Users{% endblock %}
+{% block content %}
+<h2>Users</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Active</th>
+      <th>Change Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.full_name }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.role.name if user.role else 'None' }}</td>
+      <td>{{ 'Yes' if user.active else 'No' }}</td>
+      <td>
+        <form
+          method="post"
+          action="{{ url_for('admin.set_user_role', user_id=user.id) }}"
+          class="d-flex"
+        >
+          <select
+            name="role_name"
+            class="form-select form-select-sm me-2"
+          >
+            {% for r_id, r_name in roles.items() %}
+            <option
+              value="{{ r_name }}"
+              {% if user.role and user.role.name == r_name %}selected{% endif %}
+            >
+              {{ r_name }}
+            </option>
+            {% endfor %}
+          </select>
+          <button class="btn btn-sm btn-primary" type="submit">Save</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

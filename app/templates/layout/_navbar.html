@@ -1,0 +1,77 @@
+{# app/templates/layout/_navbar.html - Navbar fragment #}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url_for('developer.dashboard') }}">
+      {{ config.SITE_NAME }}
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarMain"
+      aria-controls="navbarMain"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if current_user.is_authenticated %}
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{{ url_for('developer.my_integrations') }}"
+            >My Integrations</a
+          >
+        </li>
+        {% if current_user.is_operator or current_user.is_admin or
+        current_user.is_api_admin %}
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{{ url_for('operator.status_dashboard') }}"
+            >Operator Dashboard</a
+          >
+        </li>
+        {% endif %} {% if current_user.is_api_admin %}
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="{{ url_for('api_admin.list_integrations') }}"
+            >API Admin</a
+          >
+        </li>
+        {% endif %} {% if current_user.is_admin %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('admin.users') }}">Admin</a>
+        </li>
+        {% endif %} {% endif %}
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <button
+            id="themeToggle"
+            class="btn btn-sm btn-outline-light me-2"
+          >
+            Toggle Theme
+          </button>
+        </li>
+        {% if current_user.is_authenticated %}
+        <li class="nav-item">
+          <span class="navbar-text me-2">
+            {{ current_user.full_name }}
+          </span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

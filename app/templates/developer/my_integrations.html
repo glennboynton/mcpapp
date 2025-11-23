@@ -1,0 +1,66 @@
+{# app/templates/developer/my_integrations.html #}
+{% extends 'base.html' %}
+{% block title %}My Integrations{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>My Integrations</h2>
+  <a
+    href="{{ url_for('developer.create_integration') }}"
+    class="btn btn-success"
+    >New Integration</a
+  >
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>System</th>
+      <th>Status</th>
+      <th>Docs</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in integrations %}
+    <tr>
+      <td>{{ i.name }}</td>
+      <td>{{ i.system_name }}</td>
+      <td>
+        <span
+          class="badge bg-{% if i.status == 'enabled' %}success{% elif i.status == 'disabled' %}secondary{% else %}danger{% endif %}"
+        >
+          {{ i.status }}
+        </span>
+      </td>
+      <td>
+        {% if doc_links[i.id] %}
+        <a href="{{ doc_links[i.id] }}" target="_blank">Docs</a>
+        {% else %}
+        <span class="text-muted">None</span>
+        {% endif %}
+      </td>
+      <td>
+        <a
+          href="{{ url_for('developer.edit_integration', integration_id=i.id) }}"
+          class="btn btn-sm btn-primary"
+          >Edit</a
+        >
+        <form
+          method="post"
+          action="{{ url_for('developer.delete_integration', integration_id=i.id) }}"
+          class="d-inline"
+        >
+          <button
+            type="submit"
+            class="btn btn-sm btn-outline-danger"
+            onclick="return confirm('Delete this integration?');"
+          >
+            Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,66 @@
+{# app/templates/operator/status_dashboard.html #}
+{% extends 'base.html' %}
+{% block title %}Status Dashboard{% endblock %}
+{% block content %}
+<h2>Integration Status Dashboard</h2>
+<div class="row mb-3">
+  <div class="col-md-4">
+    <div class="card text-bg-success mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Enabled</h5>
+        <p class="card-text display-6">{{ counts['enabled'] }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-bg-secondary mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Disabled</h5>
+        <p class="card-text display-6">{{ counts['disabled'] }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-bg-danger mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Error</h5>
+        <p class="card-text display-6">{{ counts['error'] }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>System</th>
+      <th>Status</th>
+      <th>Owner</th>
+      <th>Docs</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in integrations %}
+    <tr>
+      <td>{{ i.name }}</td>
+      <td>{{ i.system_name }}</td>
+      <td>
+        <span
+          class="badge bg-{% if i.status == 'enabled' %}success{% elif i.status == 'disabled' %}secondary{% else %}danger{% endif %}"
+        >
+          {{ i.status }}
+        </span>
+      </td>
+      <td>{{ i.owner.full_name }}</td>
+      <td>
+        {% if doc_links[i.id] %}
+        <a href="{{ doc_links[i.id] }}" target="_blank">Docs</a>
+        {% else %}
+        <span class="text-muted">None</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

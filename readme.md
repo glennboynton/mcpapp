@@ -1,3 +1,5 @@
+Application Framework / Scaffold
+
 flask_mcp_api_site/
 ├─ app.py
 ├─ config.py
@@ -49,3 +51,8 @@ flask_mcp_api_site/
 │     │  └─ main.css      # compiled at runtime by Flask-Scss
 │     └─ js/
 │        └─ main.js
+
+
+Run - `pip install -r requirements.txt`
+Create .env file and update values.
+chmod +x ./run_dev.sh
