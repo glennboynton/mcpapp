@@ -11,6 +11,21 @@ from ..models import User, Role
 
 auth_bp = Blueprint("auth", __name__)
 
+@auth_bp.route("/")
+def index():
+    """
+    Default entry route for the root URL.
+
+    Redirects authenticated users to their dashboard, and unauthenticated
+    visitors to the login page.
+
+    Author:  Glenn Boynton vibe coded using Perplexity AI Workspace
+    Modified:  2025-11-23
+    """
+    if current_user.is_authenticated:
+        return redirect(url_for("developer.dashboard"))
+    return redirect(url_for("auth.login"))
+
 
 # ------------------------------------------------------------------------------
 @auth_bp.route("/login", methods=["GET", "POST"])

@@ -2,7 +2,7 @@
 # app/__init__.py - Package root (./app/__init__.py)
 # Application factory and high-level wiring for the Flask MCP API site.
 
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask_scss import Scss
 
 from config import get_config
@@ -53,6 +53,14 @@ def create_app() -> Flask:
     app.register_blueprint(api_admin_bp, url_prefix="/api-admin")
     app.register_blueprint(developer_bp, url_prefix="/developer")
     app.register_blueprint(operator_bp, url_prefix="/operator")
+
+    # Moved to /app/auth.py where current_user is defined.
+    # Default route: redirect to login or dashboard
+    # @app.route("/")
+    # def index():
+    #     if current_user.is_authenticated:
+    #         return redirect(url_for("developer.dashboard"))
+    #     return redirect(url_for("auth.login"))
 
     # Ensure database and seed roles/users.
     with app.app_context():

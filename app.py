@@ -2,6 +2,9 @@
 # app.py - Root of project (./app.py)
 # Entry point for the Flask MCP API site application.
 
+from flask import redirect, url_for
+from flask_login import current_user
+
 from app import create_app
 
 # ------------------------------------------------------------------------------
