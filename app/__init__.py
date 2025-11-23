@@ -54,7 +54,7 @@ def create_app() -> Flask:
     app.register_blueprint(developer_bp, url_prefix="/developer")
     app.register_blueprint(operator_bp, url_prefix="/operator")
 
-    # Moved to /app/auth.py where current_user is defined.
+    # Moved to /app/routes/auth.py where current_user is defined.
     # Default route: redirect to login or dashboard
     # @app.route("/")
     # def index():
