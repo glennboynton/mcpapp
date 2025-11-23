@@ -16,6 +16,7 @@ venv/
 .DS_Store
 pyvenv.cfg
 *.ini
+manifest.md
 
 # VS Code / IDE settings
 .vscode/
